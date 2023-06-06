@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace zz_maui_windows_visualstategroupbug
+﻿namespace zz_maui_windows_visualstategroupbug
 {
     public static class MyVisualStateExtension
     {
@@ -12,7 +6,7 @@ namespace zz_maui_windows_visualstategroupbug
             propertyName: "MyVisualState",
             returnType: typeof(VisualState),
             declaringType: typeof(Grid),
-            defaultValue: new VisualState() { Name = "Inactive" },
+            defaultValue: new VisualState() { Name = "Normal" },
             propertyChanged: OnVisualStateChanged,
             defaultBindingMode: BindingMode.TwoWay);
 
@@ -20,5 +14,10 @@ namespace zz_maui_windows_visualstategroupbug
         {
             VisualStateManager.GoToState((VisualElement)bindable, ((VisualState)newValue).Name);
         }
+
+
+
+
+
     }
 }

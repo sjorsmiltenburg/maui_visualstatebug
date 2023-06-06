@@ -25,12 +25,12 @@ namespace zz_maui_windows_visualstategroupbug
                 }
                 else
                 {
-                    State = new VisualState() { Name = "Inactive" };
+                    State = new VisualState() { Name = "Normal" };
                 }
             }
         }
 
-        private VisualState _state = new VisualState() { Name = "Inactive" };
+        private VisualState _state = new VisualState() { Name = "Normal" };
         public VisualState State
         {
             get => _state; set
