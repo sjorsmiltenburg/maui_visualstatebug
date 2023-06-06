@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:zz_maui_windows_visualstategroupbug"
+             x:Class="zz_maui_windows_visualstategroupbug.MainPage"
+              xmlns:viewModels="clr-namespace:zz_maui_windows_visualstategroupbug;assembly=zz_maui_windows_visualstategroupbug"           
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="DarkColor">Black</Color>
+            <Color x:Key="LightColor">white</Color>
+            <Color x:Key="ActiveColor">Orange</Color>
+            <Style x:Key="FilterItemGridStyle" TargetType="Grid">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup Name="CommonStates">
+                            <VisualState Name="Inactive">
+                                <VisualState.Setters>
+                                    <Setter Property="Background">
+                                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                            <GradientStop Color="{StaticResource DarkColor}" Offset="0.5"/>
+                                            <GradientStop Color="{StaticResource LightColor}" Offset="0"/>
+                                        </LinearGradientBrush>
+                                    </Setter>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState Name="Active">
+                                <VisualState.Setters>
+                                    <Setter Property="Background">
+                                        <SolidColorBrush Color="{StaticResource ActiveColor}"/>
+                                    </Setter>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="FilterItemLabelStyle" TargetType="Label">
+                <Setter Property="MaxLines" Value="1"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="5,0,5,0"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FlexLayout.Shrink" Value="0"/>
+                <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup Name="CommonStates">
+                            <VisualState Name="Inactive">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{StaticResource LightColor}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState Name="Active">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{StaticResource DarkColor}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <FlexLayout BindableLayout.ItemsSource="{Binding MyItems}"  Direction="Column">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="0" Margin="0" 
+                                          x:DataType="viewModels:MyItemViewModel"   
+                                          Style="{StaticResource FilterItemGridStyle}"
+                                          viewModels:MyVisualStateExtension.MyVisualState="{Binding State}"
+                                          ColumnDefinitions="Auto,*"                                         
+                                          >
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ToggleActiveCommand}"></TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                        <Label Text="Base:"/>
+                        <Label Grid.Column="1" 
+                                               Text="{Binding Text}" 
+                                               viewModels:MyVisualStateExtension.MyVisualState="{Binding State}" 
+                                               Style="{StaticResource FilterItemLabelStyle}"
+                                               ></Label>
+                    </Grid>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </FlexLayout>
+
+    </ScrollView>
+
+</ContentPage>
