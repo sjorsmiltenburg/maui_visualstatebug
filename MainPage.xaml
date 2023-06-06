@@ -16,6 +16,13 @@
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup Name="CommonStates">
+                            <VisualState Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Background">
+                                        <SolidColorBrush Color="Green"/>
+                                    </Setter>
+                                </VisualState.Setters>
+                            </VisualState>
                             <VisualState Name="Inactive">
                                 <VisualState.Setters>
                                     <Setter Property="Background">
